@@ -17,6 +17,10 @@ export class SideMenuComponent implements OnInit {
     {
       texto: 'Dinámicos', 
       ruta: './template/dinamicos'
+    }, 
+    {
+      texto: 'Switches', 
+      ruta: './template/switches'
     }
   ]
 
@@ -28,6 +32,10 @@ export class SideMenuComponent implements OnInit {
     {
       texto: 'Dinámicos', 
       ruta: './reactivos/dinamicos'
+    }, 
+    {
+      texto: 'Switches', 
+      ruta: './reactivos/switches'
     }
   ]
   constructor() { }

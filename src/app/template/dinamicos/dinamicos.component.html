@@ -1,1 +1,47 @@
-<p>dinamicos works!</p>
+<h2>Formularios dinámicos</h2>
+<hr/>
+<div class="row">
+    <div class="col">
+        <form (ngSubmit)="guardar()" #miFormulario="ngForm">
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input [(ngModel)]="persona.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required minlength="3">
+                    <span *ngIf="validarNombre()" class="form-text text-danger">Debe de ingresar un producto</span>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input [(ngModel)]="nuevoJuego" name="nuevoJuego" type="text" class="form-control" placeholder="Agregar juego" required minlength="3">
+                        <button (click)="agregar()" class="btn btn-outline-primary" type="button">Agregar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Juego</label>
+                <div class="col-sm-9">
+                    <div class="input-group mb-1" *ngFor="let juego of persona.favoritos; let i = index">
+                        <input [(ngModel)]="juego.nombre" type="text" name="favorito_{{i}}" class="form-control" placeholder="Nombre del juego">
+                        <button (click)="eliminar(juego.id)" class="btn btn-outline-danger" type="button">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button [disabled]="miFormulario.invalid" (click)="guardar()" type="submit" class="btn btn-primary float-end">Aceptar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <span>Data</span>
+        <pre>{{persona | json}}</pre>
+    </div>
+</div>
