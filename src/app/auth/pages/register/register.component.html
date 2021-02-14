@@ -1,0 +1,72 @@
+<h2>Registro</h2>
+<hr/>
+<div class="row">
+    <div class="col">
+        <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="guardar()">
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" formControlName="nombre" name="nombre" class="form-control" placeholder="Nombre del usuario">
+                    <span *ngIf="validar('nombre')" class="form-text text-danger">
+                        El formato del nombre debe de ser correcto
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" formControlName="email" name="email" class="form-control" placeholder="Email">
+                    <span *ngIf="validar('email')" class="form-text text-danger">
+                        {{emailError}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre de usuario</label>
+                <div class="col-sm-9">
+                    <input type="text" formControlName="username" name="username" class="form-control" placeholder="Nombre de usuario">
+                    <span *ngIf="validar('username')" class="form-text text-danger">
+                        El username ya se encuentra registrado
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Contraseña</label>
+                <div class="col-sm-9">
+                    <input type="password" formControlName="password" name="password" class="form-control" placeholder="Contraseña">
+                    <span *ngIf="validar('password')" class="form-text text-danger">
+                        La contraseña debe de ser de 6 caracteres
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Repetir Contraseña</label>
+                <div class="col-sm-9">
+                    <input type="password" formControlName="password2" name="password2" class="form-control" placeholder="Repetir Contraseña">
+                    <span *ngIf="validar('password2')" class="form-text text-danger">
+                        Las contraseñas deben de ser iguales
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary float-end">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<h2>Formulario valido: {{miFormulario.valid}}</h2>
+<h2>Nombre: {{miFormulario.controls.nombre.errors | json}}</h2>
+<h2>Email: {{miFormulario.controls.email.errors | json}}</h2>
+<h2>Username: {{miFormulario.controls.username.errors | json}}</h2>
+<h2>Password: {{miFormulario.controls.password.errors | json}}</h2>
+<h2>Password2: {{miFormulario.controls.password2.errors | json}}</h2>
