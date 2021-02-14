@@ -2,32 +2,33 @@
 <hr/>
 <div class="row">
     <div class="col">
-        <form>
+        <form [formGroup]="miFormulario" (ngSubmit)="guardar()">
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Producto</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" placeholder="Nombre del producto">
-                    <span class="form-text text-danger">Debe de ingresar un producto</span>
+                    <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre del producto">
+                    <span *ngIf="validar('nombre')" class="form-text text-danger">Debe de ingresar un producto</span>
                 </div>
             </div>
 
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Precio</label>
                 <div class="col-sm-9">
-                    <input class="form-control" placeholder="Precio" required min="0">
-                    <span class="form-text text-danger">Debe de ingresar un precio valido</span>
+                    <input class="form-control" formControlName="precio" placeholder="Precio" required min="0">
+                    <span *ngIf="validar('precio')" class="form-text text-danger">Debe de ingresar un precio valido</span>
                 </div>
             </div>
 
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Existencias</label>
                 <div class="col-sm-9">
-                    <input type="number" class="form-control" placeholder="Existencias">
+                    <input type="number" formControlName="existencias" class="form-control" placeholder="Existencias">
+                    <span *ngIf="validar('existencias')" class="form-text text-danger">Debe de ingresar un precio válido</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary float-end">Aceptar</button>
+                    <button [disabled]="miFormulario.invalid" type="submit" class="btn btn-primary float-end">Aceptar</button>
                 </div>
             </div>
         </form>
@@ -35,6 +36,16 @@
 </div>
 <div class="row">
     <div class="col">
+        <span>Valid</span>
+        <pre>{{miFormulario.valid}}</pre>
 
+        <span>Pristine</span>
+        <pre>{{miFormulario.pristine}}</pre>
+
+        <span>Touched</span>
+        <pre>{{miFormulario.touched}}</pre>
+
+
+        <pre>{{miFormulario.value | json }}</pre>
     </div>
 </div>

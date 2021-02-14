@@ -2,34 +2,37 @@
 <hr/>
 <div class="row">
     <div class="col">
-        <form>
+        <form [formGroup]="miFormulario" (ngSubmit)="guardar()">
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Nombre</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" placeholder="Nombre">
-                    <span class="form-text text-danger">Debe de ingresar un producto</span>
+                    <input formControlName="nombre" type="text" class="form-control" placeholder="Nombre">
+                    <span *ngIf="validar('nombre')" class="form-text text-danger">Debe de ingresar un producto</span>
                 </div>
             </div>
-
+            <!-- Agregar Favorito -->
             <div class="mb-3 row">
-                <label class="col-sm-3 col-form-label">Nombre</label>
+                <label class="col-sm-3 col-form-label">Agregar</label>
                 <div class="col-sm-9">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Agregar juego">
-                        <button class="btn btn-outline-primary" type="button">Agregar</button>
+                        <input class="form-control" [formControl]="nuevoJuego" placeholder="Agregar favorito" (keyup.enter)="agregarFavorito()">
+                        <button class="btn btn-outline-primary" type="button" (click)="agregarFavorito()">Agregar
+                </button>
                     </div>
                 </div>
             </div>
 
+            <!-- Lista de Juegos Favoritos -->
             <div class="mb-3 row">
-                <label class="col-sm-3 col-form-label">Juego</label>
-                <div class="col-sm-9">
-                    <div class="input-group mb-1">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-outline-danger" type="button">Eliminar</button>
+                <label class="col-sm-3 col-form-label">Favoritos</label>
+                <div class="col-sm-9" formArrayName="favoritos">
+                    <div class="input-group mb-1" *ngFor="let favorito of favoritos.controls; let i = index">
+                        <input class="form-control" [formControlName]="i">
+                        <button (click)="borrar(i)" class="btn btn-outline-danger" type="button">Eliminar</button>
                     </div>
                 </div>
             </div>
+
 
             <div class="row">
                 <div class="col">
@@ -41,6 +44,10 @@
 </div>
 <div class="row">
     <div class="col">
-        <span>Data</span>
+        <span>Valid</span>
+        <pre>{{miFormulario.valid}}</pre>
+
+        <span>Valued</span>
+        <pre>{{miFormulario.value | json}}</pre>
     </div>
 </div>
